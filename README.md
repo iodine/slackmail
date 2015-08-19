@@ -17,15 +17,25 @@ pip install [--user] git+https://github.com/iodine/slackmail
 
 # Running
 
+By default, the servers listen on localhost, port 5025.  This is to simplify testing
+locally.  But feel free to run on port 25 and just add an MX record to have it
+operate as a "real" email server!
+
+## Simple single hook server
 ```
-slackmail --webhook-url='https://mydomain.slack.com...&token=123'\
-  [--listen-address=host:port]
+slackmail-local\
+  --webhook-url='https://mydomain.slack.com...&token=123'\
+  [--listen-address=host:port]\
   [--authorization_token=secureME]
 ```
 
 If you specify the `authorization_token` flag, only messages containing the token
 somewhere in the subject or message body will be forwarded to Slack.
 
-By default, the server listens on localhost, port 5025.  This is to simplify testing
-locally.  But feel free to run on port 25 and just add an MX record to have it
-operate as a "real" email server!
+## Database enabled server
+```
+slackmail-db [--listen-address=host:port]
+```
+
+The default database used is just a SQLite database called `mail.db`.  It will
+be created in whatever directory you run the slackmail-db command.

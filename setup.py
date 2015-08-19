@@ -8,7 +8,8 @@ setuptools.setup(
   url='http://github.com/iodine/slackmail',
   install_requires=[
     'click',
-    'requests'
+    'requests',
+    'sqlalchemy',
   ],
   description=('Email-to-slack bridge.'),
   packages=['slackmail'],
@@ -16,6 +17,7 @@ setuptools.setup(
   test_suite = 'nose.collector',
   entry_points='''
   [console_scripts]
-  slackmail=slackmail.main:run_server
+  slackmail-db=slackmail.db_server:db_server
+  slackmail-local=slackmail.simple_server:simple_server
   '''
 )
